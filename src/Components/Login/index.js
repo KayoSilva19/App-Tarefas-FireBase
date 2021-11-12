@@ -5,7 +5,7 @@ import firebase from '../../Services/firebaseConnection';
 
 
 
-export default function Login( { changestatus } ) {
+export default function Login( { changeStatus } ) {
     const [type, setType] = useState('login');
 
     const [email, setEmail] = useState('');
@@ -16,7 +16,7 @@ export default function Login( { changestatus } ) {
             // Aqui fazemos o login
             const user = firebase.auth().signInWithEmailAndPassword(email, password)
                 .then((user) => {
-                    changestatus(user.user.uid)
+                    changeStatus(user.user.uid)
                 })
                 .catch((error) => {
                     console.log(error);
@@ -29,7 +29,7 @@ export default function Login( { changestatus } ) {
             // Cadastro de usuario
             const user = firebase.auth().createUserWithEmailAndPassword(email, password)
                 .then((user) => {
-                    changestatus(user.user.uid)
+                    changeStatus(user.user.uid)
                 })
                 .catch((error) => {
                     console.log(error);
@@ -54,6 +54,7 @@ export default function Login( { changestatus } ) {
                 style={styles.input}
                 value={password}
                 onChangeText={(texto) => setPassWord(texto)}
+                secureTextEntry={true}
             />
 
             <TouchableOpacity
